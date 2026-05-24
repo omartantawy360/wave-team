@@ -1,6 +1,3 @@
-// Wave — interactions & data rendering
-
-// --- CUSTOM CURSOR & GLOW BLOB ---
 const cursor = document.querySelector(".custom-cursor");
 const cursorDot = document.querySelector(".custom-cursor-dot");
 
@@ -272,8 +269,8 @@ function renderProjects(lang) {
   grid.innerHTML = visibleProjects
     .map((p, i) => {
       const idx = i + 1;
-      const title = p.title || t[`project-${idx}-title`] || "";
-      const desc = p.desc || t[`project-${idx}-desc`] || "";
+      const title = t[`project-${idx}-title`] || p.title || "";
+      const desc = t[`project-${idx}-desc`] || p.desc || "";
       const imagePath = p.img ? p.img.replace(/\\\\/g, "/") : "";
       const hasImage = imagePath !== "";
       const imageHtml = hasImage
@@ -281,9 +278,17 @@ function renderProjects(lang) {
         : `<div class="absolute inset-0 bg-gradient-to-br from-cyan/15 via-blue/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
            <div class="absolute inset-0 bg-[radial-gradient(rgba(34,211,238,0.1)_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
            <div class="relative font-display text-4xl font-black tracking-wider opacity-10 group-hover:opacity-20 transition-opacity duration-500 select-none uppercase w-full h-full flex items-center justify-center" style="color:var(--cyan)">
-             ${title.split(" ").map((w) => w[0]).join("")}
+             ${title
+               .split(" ")
+               .map((w) => w[0])
+               .join("")}
            </div>`;
-      const techTags = p.tech.map((tech) => `<span class="text-[10px] font-extrabold tracking-widest uppercase px-2.5 py-1 rounded-lg bg-primary/10 text-primary border border-primary/10">${tech}</span>`).join("");
+      const techTags = p.tech
+        .map(
+          (tech) =>
+            `<span class="text-[10px] font-extrabold tracking-widest uppercase px-2.5 py-1 rounded-lg bg-primary/10 text-primary border border-primary/10">${tech}</span>`,
+        )
+        .join("");
       const bottomLink = p.liveLink
         ? `<a href="${p.liveLink}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-500 uppercase tracking-widest group-hover:text-primary transition-colors flex items-center gap-1.5"><span>${t["project-live"] ? t["project-live"].replace(" ↗", "") : "Launch Project"}</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>`
         : `<span class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">${title}</span>`;
@@ -319,7 +324,7 @@ function initProjectShowMore() {
   if (!btn) return;
   btn.addEventListener("click", () => {
     visibleCount += 6; // 2 more rows (3 cols × 2 = 6)
-    const lang = localStorage.getItem("lang") || "en";
+    const lang = localStorage.getItem("lang") || "ar";
     renderProjects(lang);
   });
 }
@@ -454,7 +459,6 @@ document.getElementById("team-grid").innerHTML = team
 // Re-observe team reveal elements
 document.querySelectorAll("#team-grid .reveal").forEach((el) => io.observe(el));
 
-
 // Re-observe newly injected reveal elements
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
@@ -564,9 +568,18 @@ const translations = {
     "project-3-desc": "Editorial portfolio for a creative studio — bold type, smooth scroll.",
     "project-4-title": "Tide Banking",
     "project-4-desc": "Mobile-first marketing site for a modern neobank.",
+    "project-5-desc": "A flags shop website with a sleek design and interactive features.",
+    "project-6-desc": "A modern perfume shop website with a sleek design and interactive features.",
+    "project-7-desc":
+      "A modern fitness center website with a sleek design and interactive features.",
+    "project-8-desc":
+      "A modern watches store website with a sleek design and interactive features.",
+    "project-9-desc":
+      "A modern furniture store website with a sleek design and interactive features.",
+    "project-10-desc": "A modern restaurant website with a sleek design and interactive features.",
+    "project-11-desc": "A modern portfolio website with a sleek design and interactive features.",
     "project-live": "Live Demo ↗",
     "project-github": "GitHub",
-
   },
 
   ar: {
@@ -628,7 +641,6 @@ const translations = {
     "section-team-title": "الأشخاص وراء Wave.",
     "team-body": "فريق متماسك من المصممين والمهندسين المهووسين بالتفاصيل.",
 
-
     // Contact
     "section-contact-tag": "07 — تواصل",
     "section-contact-title": "لنبنِ <br/><span class='gradient-text'>شيئاً رائعاً.</span>",
@@ -667,6 +679,20 @@ const translations = {
     "project-3-desc": "محفظة تحريرية لاستوديو إبداعي — خط عريض، تمرير سلس.",
     "project-4-title": "Tide Banking",
     "project-4-desc": "موقع تسويقي يبدأ من الجوال لبنك رقمي حديث.",
+    "project-5-title": "Flagxin",
+    "project-5-desc": "موقع متجر أعلام بتصميم أنيق وميزات تفاعلية.",
+    "project-6-title": "Aurum Shop",
+    "project-6-desc": "موقع متجر عطور حديث بتصميم أننيق وميزات تفاعلية.",
+    "project-7-title": "Apex gym",
+    "project-7-desc": "موقع مركز لياقة عصري بتصميم نظيف وواجهة مستخدم سلسة.",
+    "project-8-title": "Watches Store",
+    "project-8-desc": "موقع متجر ساعات عصري بتصميم أنيق وميزات جذابة.",
+    "project-9-title": "Furni Store",
+    "project-9-desc": "موقع متجر أثاث حديث بتصميم أننيق وميزات تفاعلية.",
+    "project-10-title": "Savior Restaurant",
+    "project-10-desc": "موقع مطعم عصري بتصميم جذاب وواجهة مستخدم سلسة.",
+    "project-11-title": "Portofloi Website",
+    "project-11-desc": "موقع محفظة حديث بتصميم أنيق وميزات تفاعلية.",
     "project-live": "عرض مباشر ↗",
     "project-github": "GitHub",
 
@@ -705,7 +731,6 @@ function applyTranslations(lang) {
   // Re-render dynamic sections so they use the new language
   renderServices(lang);
   renderProjects(lang);
-
 }
 
 function setLanguage(lang) {
@@ -719,10 +744,10 @@ function initLanguageToggle() {
   const btn = document.getElementById("lang-toggle");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    const current = localStorage.getItem("lang") || "en";
+    const current = localStorage.getItem("lang") || "ar";
     setLanguage(current === "en" ? "ar" : "en");
   });
-  setLanguage(localStorage.getItem("lang") || "en");
+  setLanguage(localStorage.getItem("lang") || "ar");
 }
 
 // ============================================================
@@ -760,12 +785,27 @@ document.addEventListener("DOMContentLoaded", () => {
   initProjectShowMore();
 });
 
+const whatsappPhone = "201550888640";
+
 document.getElementById("contact-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
+  const form = e.target;
+  const nameInput = form.querySelector('input[type="text"]');
+  const emailInput = form.querySelector('input[type="email"]');
+  const messageInput = form.querySelector("textarea");
   const status = document.getElementById("form-status");
+
+  const name = nameInput?.value.trim() || "No name provided";
+  const email = emailInput?.value.trim() || "No email provided";
+  const message = messageInput?.value.trim() || "No project details provided.";
+
+  const rawText = `New project request from ${name}\nEmail: ${email}\n\nProject details:\n${message}`;
+  const url = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawText)}`;
+
+  window.open(url, "_blank");
+
   if (status) {
     status.classList.remove("hidden");
-    e.target.reset();
     setTimeout(() => status.classList.add("hidden"), 4000);
   }
 });
