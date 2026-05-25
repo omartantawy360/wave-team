@@ -264,6 +264,13 @@ const projects = [
     tech: ["React", "Node.js", "Tailwind", "JavaScript"],
     liveLink: "https://omartantawy360.github.io/edu-por-3/student",
   },
+  {
+    img: "./images/maison.png",
+    title: "Maison",
+    desc: "A premium high-end e-commerce fashion website featuring a minimalist quiet luxury aesthetic and responsive design.",
+    tech: ["React", "Tailwind", "JavaScript"],
+    liveLink: "https://maison-nine-wheat.vercel.app/",
+  },
 ];
 
 let visibleCount = 6; // default visible projects
@@ -286,9 +293,9 @@ function renderProjects(lang) {
            <div class="absolute inset-0 bg-[radial-gradient(rgba(34,211,238,0.1)_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
            <div class="relative font-display text-4xl font-black tracking-wider opacity-10 group-hover:opacity-20 transition-opacity duration-500 select-none uppercase w-full h-full flex items-center justify-center" style="color:var(--cyan)">
              ${title
-          .split(" ")
-          .map((w) => w[0])
-          .join("")}
+               .split(" ")
+               .map((w) => w[0])
+               .join("")}
            </div>`;
       const techTags = p.tech
         .map(
@@ -596,6 +603,9 @@ const translations = {
     "project-12-title": "EduComp Portal",
     "project-12-desc":
       "A comprehensive student competition portal and dashboard for WE School, facilitating registration, team browsing, and leaderboard tracking.",
+    "project-13-title": "Maison Luxury",
+    "project-13-desc":
+      "A premium high-end e-commerce fashion website featuring a minimalist quiet luxury aesthetic and responsive design.",
     "project-live": "Live Demo ↗",
     "project-github": "GitHub",
   },
@@ -714,6 +724,9 @@ const translations = {
     "project-12-title": "بوابة EduComp",
     "project-12-desc":
       "بوابة مسابقات طلابية شاملة ولوحة تحكم لمدرسة WE، تتيح التسجيل وتصفح الفرق ومتابعة لوحة الصدارة.",
+    "project-13-title": "ميزون لوكس (Maison)",
+    "project-13-desc":
+      "موقع تجارة إلكترونية فاخر للأزياء الراقية، يتميز بجمالية هادئة وبسيطة وتصميم متجاوب بالكامل.",
     "project-live": "عرض مباشر ↗",
     "project-github": "GitHub",
 
