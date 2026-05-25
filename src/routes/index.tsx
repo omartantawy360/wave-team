@@ -11,7 +11,9 @@ function Index() {
   }, []);
   return (
     <div className="flex min-h-screen items-center justify-center bg-black text-white">
-      <a href="/wave/index.html" className="underline">Open Wave site →</a>
+      <a href="/wave/index.html" className="underline">
+        Open Wave site →
+      </a>
     </div>
   );
 }

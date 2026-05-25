@@ -73,17 +73,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "wave-dev portoflio" },
-      { name: "description", content: "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team." },
+      {
+        name: "description",
+        content:
+          "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "wave-dev portoflio" },
-      { property: "og:description", content: "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team." },
+      {
+        property: "og:description",
+        content:
+          "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "wave-dev portoflio" },
-      { name: "twitter:description", content: "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WluYObllIpc1ZWv1i9jJOH5YyJp2/social-images/social-1779443965308-wave.jpg.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/WluYObllIpc1ZWv1i9jJOH5YyJp2/social-images/social-1779443965308-wave.jpg.webp" },
+      {
+        name: "twitter:description",
+        content:
+          "Wave Digital Studio is a modern, visually impressive portfolio website for a front-end development team.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/WluYObllIpc1ZWv1i9jJOH5YyJp2/social-images/social-1779443965308-wave.jpg.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/WluYObllIpc1ZWv1i9jJOH5YyJp2/social-images/social-1779443965308-wave.jpg.webp",
+      },
     ],
     links: [
       {
