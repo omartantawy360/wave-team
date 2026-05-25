@@ -181,20 +181,11 @@ function renderServices(lang) {
 */
 const projects = [
   {
-    img: "./images/watches-store.png",
-    title: "Watches Store",
-    desc: "A modern watches store website with a sleek design and interactive features.",
-    tech: ["HTML", "Tailwind", "JavaScript"],
-    liveLink: "https://watches-store-wave.vercel.app/",
-    translationKey: "project-8",
-  },
-  {
     img: "./images/tech-store.png",
     title: "Tech Store",
     desc: "A store for selling tech products with a sleek, modern design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript", "Chart.js"],
     liveLink: "https://omartantawy360.github.io/elctro-shop/",
-    translationKey: "project-1",
   },
   {
     img: "./images/malaz.png",
@@ -202,7 +193,6 @@ const projects = [
     desc: "A modern coffee shop website with an elegant design and seamless user experience.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://cafee-pink.vercel.app/",
-    translationKey: "project-2",
   },
   {
     img: "./images/academic-enter.png",
@@ -210,7 +200,6 @@ const projects = [
     desc: "A platform for academic institutions to showcase their programs and research.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://omartantawy360.github.io/Acadimic-center2/",
-    translationKey: "project-3",
   },
   {
     img: "./images/travel-agency.png",
@@ -218,7 +207,6 @@ const projects = [
     desc: "Mobile-first marketing site for a modern neobank.",
     tech: ["HTML", "CSS", "JavaScript"],
     liveLink: "https://abdotete142-maker.github.io/Salah_khalaf/",
-    translationKey: "project-4",
   },
   {
     img: "./images/flagxin.png",
@@ -226,7 +214,6 @@ const projects = [
     desc: "flags shop website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://abdelrhman005.github.io/Flagxin/",
-    translationKey: "project-5",
   },
   {
     img: "./images/aurum-shop.png",
@@ -234,7 +221,6 @@ const projects = [
     desc: "A modern perfume shop website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://abdotete142-maker.github.io/Perfumes/",
-    translationKey: "project-6",
   },
   {
     img: "./images/apex.png",
@@ -242,7 +228,13 @@ const projects = [
     desc: "A modern fitness center website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://gym1-khaki-omega.vercel.app/",
-    translationKey: "project-7",
+  },
+  {
+    img: "./images/watches-store.png",
+    title: "Watches Store",
+    desc: "A modern watches store website with a sleek design and interactive features.",
+    tech: ["HTML", "Tailwind", "JavaScript"],
+    liveLink: "https://watches-store-wave.vercel.app/",
   },
   {
     img: "./images/furni-store.png",
@@ -250,7 +242,6 @@ const projects = [
     desc: "A modern furniture store website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://lander2007.github.io/Furni/index.html",
-    translationKey: "project-9",
   },
   {
     img: "./images/savior-restaurant.png",
@@ -258,7 +249,6 @@ const projects = [
     desc: "A modern restaurant website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://savior-rosy.vercel.app/",
-    translationKey: "project-10",
   },
   {
     img: "./images/udimy-porto.png",
@@ -266,7 +256,6 @@ const projects = [
     desc: "A modern portfolio website with a sleek design and interactive features.",
     tech: ["HTML", "Tailwind", "JavaScript"],
     liveLink: "https://omartantawy360.github.io/udimy-porto/index.html",
-    translationKey: "project-11",
   },
   {
     img: "./images/educomp.png",
@@ -274,7 +263,6 @@ const projects = [
     desc: "A comprehensive student competition portal and dashboard for WE School, facilitating registration, team browsing, and leaderboard tracking.",
     tech: ["React", "Node.js", "Tailwind", "JavaScript"],
     liveLink: "https://omartantawy360.github.io/edu-por-3/student",
-    translationKey: "project-12",
   },
   {
     img: "./images/maison.png",
@@ -282,7 +270,6 @@ const projects = [
     desc: "A premium high-end e-commerce fashion website featuring a minimalist quiet luxury aesthetic and responsive design.",
     tech: ["React", "Tailwind", "JavaScript"],
     liveLink: "https://maison-nine-wheat.vercel.app/",
-    translationKey: "project-13",
   },
 ];
 
@@ -296,9 +283,8 @@ function renderProjects(lang) {
   grid.innerHTML = visibleProjects
     .map((p, i) => {
       const idx = i + 1;
-      const key = p.translationKey || `project-${idx}`;
-      const title = t[`${key}-title`] || p.title || "";
-      const desc = t[`${key}-desc`] || p.desc || "";
+      const title = t[`project-${idx}-title`] || p.title || "";
+      const desc = t[`project-${idx}-desc`] || p.desc || "";
       const imagePath = p.img ? p.img.replace(/\\\\/g, "/") : "";
       const hasImage = imagePath !== "";
       const imageHtml = hasImage
