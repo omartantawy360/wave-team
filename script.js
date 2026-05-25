@@ -337,7 +337,7 @@ function initProjectShowMore() {
   const btn = document.getElementById("projects-show-more");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    visibleCount += 6; // 2 more rows (3 cols × 2 = 6)
+    visibleCount = projects.length; // Show all projects on first click for premium UX
     const lang = localStorage.getItem("lang") || "ar";
     renderProjects(lang);
   });
