@@ -189,6 +189,14 @@ const projects = [
     translationKey: "project-8",
   },
   {
+    img: "./images/handmade.png",
+    title: "Handmade Store",
+    desc: "A premium e-commerce platform showcasing authentic Egyptian artisan crafts, heritage pieces, and sustainable luxury ceramics.",
+    tech: ["HTML", "Tailwind", "Alpine.js", "JavaScript"],
+    liveLink: "https://mohamed-waled301.github.io/handmade/",
+    translationKey: "project-14",
+  },
+  {
     img: "./images/tech-store.png",
     title: "Tech Store",
     desc: "A store for selling tech products with a sleek, modern design and interactive features.",
@@ -628,6 +636,9 @@ const translations = {
     "project-13-title": "Maison Luxury",
     "project-13-desc":
       "A premium high-end e-commerce fashion website featuring a minimalist quiet luxury aesthetic and responsive design.",
+    "project-14-title": "Handmade Store",
+    "project-14-desc":
+      "A premium e-commerce platform showcasing authentic Egyptian artisan crafts, heritage pieces, and sustainable luxury ceramics.",
     "project-live": "Live Demo ↗",
     "project-github": "GitHub",
   },
@@ -749,6 +760,9 @@ const translations = {
     "project-13-title": "ميزون لوكس (Maison)",
     "project-13-desc":
       "موقع تجارة إلكترونية فاخر للأزياء الراقية، يتميز بجمالية هادئة وبسيطة وتصميم متجاوب بالكامل.",
+    "project-14-title": "متجر هاند ميد (Handmade)",
+    "project-14-desc":
+      "منصة تجارة إلكترونية فاخرة تستعرض الحرف اليدوية المصرية الأصيلة، والقطع التراثية، وخزفيات راقية ومستدامة.",
     "project-live": "عرض مباشر ↗",
     "project-github": "GitHub",
 
