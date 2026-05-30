@@ -20,16 +20,14 @@ document.addEventListener("mousemove", (e) => {
     cursor.style.opacity = "1";
   }
 
-  // Update dot position immediately
+  // Update dot position immediately using translate3d
   if (cursorDot) {
-    cursorDot.style.left = `${mouseX}px`;
-    cursorDot.style.top = `${mouseY}px`;
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
   }
 
-  // Update glow blob position immediately
+  // Update glow blob position immediately using translate3d
   if (glowBlob) {
-    glowBlob.style.left = `${mouseX}px`;
-    glowBlob.style.top = `${mouseY}px`;
+    glowBlob.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
   }
 });
 
@@ -40,8 +38,7 @@ function animateCursor() {
   cursorY += (mouseY - cursorY) * ease;
 
   if (cursor) {
-    cursor.style.left = `${cursorX}px`;
-    cursor.style.top = `${cursorY}px`;
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
   }
 
   requestAnimationFrame(animateCursor);
@@ -151,10 +148,11 @@ function renderServices(lang) {
   const t = translations[lang] || translations.en;
   const grid = document.getElementById("services-grid");
   if (!grid) return;
+  const isReRender = grid.children.length > 0;
   grid.innerHTML = services
     .map(
       (s, i) => `
-    <div class="glass-card p-8 reveal group" style="transition-delay:${i * 60}ms">
+    <div class="glass-card p-8 reveal ${isReRender ? "in" : ""} group" style="transition-delay:${i * 60}ms">
       <div class="text-3xl text-cyan font-display group-hover:scale-110 transition-all duration-300 w-fit">${s.icon}</div>
       <h3 class="mt-5 font-display text-xl font-semibold group-hover:text-cyan transition-colors duration-300">${t[`service-${i + 1}-title`] || s.title}</h3>
       <p class="mt-3 text-sm leading-relaxed">${t[`service-${i + 1}-desc`] || s.desc}</p>
@@ -164,7 +162,9 @@ function renderServices(lang) {
   `,
     )
     .join("");
-  grid.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  if (!isReRender) {
+    grid.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  }
 }
 
 /*
@@ -299,6 +299,7 @@ function renderProjects(lang) {
   const t = translations[lang] || translations.en;
   const grid = document.getElementById("projects-grid");
   if (!grid) return;
+  const isReRender = grid.children.length > 0;
   // Use visibleCount to limit displayed projects
   const visibleProjects = projects.slice(0, visibleCount);
   grid.innerHTML = visibleProjects
@@ -329,7 +330,7 @@ function renderProjects(lang) {
         ? `<a href="${p.liveLink}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-500 uppercase tracking-widest group-hover:text-primary transition-colors flex items-center gap-1.5"><span>${t["project-live"] ? t["project-live"].replace(" ↗", "") : "Launch Project"}</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>`
         : `<span class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">${title}</span>`;
       return `
-        <article class="glass-card project-card reveal group flex flex-col overflow-hidden animate-fade-in-up" style="animation-delay: ${i * 60}ms;">
+        <article class="glass-card project-card reveal ${isReRender ? "in" : ""} group flex flex-col overflow-hidden animate-fade-in-up" style="animation-delay: ${i * 60}ms;">
           <div class="relative h-60 overflow-hidden bg-slate-950/40">
             ${imageHtml}
             <div class="absolute inset-0 bg-slate-950/50 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm">
@@ -346,8 +347,10 @@ function renderProjects(lang) {
       `;
     })
     .join("");
-  // Observe reveal elements
-  grid.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  // Observe reveal elements only if not a re-render
+  if (!isReRender) {
+    grid.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  }
   // Show/hide Show More button
   const btn = document.getElementById("projects-show-more");
   if (btn) {
@@ -613,13 +616,17 @@ const translations = {
     "service-6-desc": "Hand-crafted HTML, CSS, JavaScript & Tailwind — no template bloat.",
 
     "project-1-title": "Tech Store",
-    "project-1-desc": "A store for selling tech products with a sleek, modern design and interactive features.",
+    "project-1-desc":
+      "A store for selling tech products with a sleek, modern design and interactive features.",
     "project-2-title": "Malaz Caffe",
-    "project-2-desc": "A modern coffee shop website with an elegant design and seamless user experience.",
+    "project-2-desc":
+      "A modern coffee shop website with an elegant design and seamless user experience.",
     "project-3-title": "Academic Enterprise",
-    "project-3-desc": "A platform for academic institutions to showcase their programs and research.",
+    "project-3-desc":
+      "A platform for academic institutions to showcase their programs and research.",
     "project-4-title": "Travel Agency",
-    "project-4-desc": "A beautiful travel agency website highlighting exotic destinations and custom tour packages.",
+    "project-4-desc":
+      "A beautiful travel agency website highlighting exotic destinations and custom tour packages.",
     "project-5-desc": "A flags shop website with a sleek design and interactive features.",
     "project-6-desc": "A modern perfume shop website with a sleek design and interactive features.",
     "project-7-desc":
