@@ -704,3 +704,97 @@ a,
 label {
   transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ============================================================
+   UI CRAFT SHOWCASE (HERO SECTION)
+   ============================================================ */
+.ui-showcase-container {
+  perspective: 1000px;
+}
+
+.ui-card {
+  will-change: transform, box-shadow, border-color;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+/* Base floating animation definitions */
+.ui-card-analytics {
+  animation: float-analytics 7s ease-in-out infinite;
+  z-index: 10;
+}
+.ui-card-analytics:hover {
+  transform: translateY(-8px) rotate(1deg) scale(1.04) !important;
+  box-shadow: 0 30px 60px -15px rgba(34, 211, 238, 0.25);
+  border-color: rgba(34, 211, 238, 0.45);
+  z-index: 30;
+}
+
+.ui-card-metrics {
+  animation: float-metrics 6s ease-in-out infinite;
+  z-index: 20;
+}
+.ui-card-metrics:hover {
+  transform: translateY(-8px) rotate(-1deg) scale(1.04) !important;
+  box-shadow: 0 30px 60px -15px rgba(34, 211, 238, 0.25);
+  border-color: rgba(34, 211, 238, 0.45);
+  z-index: 30;
+}
+
+.ui-card-billing {
+  animation: float-billing 8s ease-in-out infinite;
+  z-index: 15;
+}
+.ui-card-billing:hover {
+  transform: translateY(-8px) rotate(2deg) scale(1.04) !important;
+  box-shadow: 0 30px 60px -15px rgba(34, 211, 238, 0.25);
+  border-color: rgba(34, 211, 238, 0.45);
+  z-index: 30;
+}
+
+/* Staggered independent float keyframes */
+@keyframes float-analytics {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(1deg);
+  }
+}
+
+@keyframes float-metrics {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(1deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(-1deg);
+  }
+}
+
+@keyframes float-billing {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.5deg);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotate(-0.5deg);
+  }
+}
+
+/* Mobile responsive scale overrides for UI Showcase */
+@media (max-width: 480px) {
+  .ui-showcase-container {
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+}
+@media (max-width: 380px) {
+  .ui-showcase-container {
+    transform: scale(0.72);
+    transform-origin: center center;
+  }
+}
