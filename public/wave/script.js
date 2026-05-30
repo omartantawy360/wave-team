@@ -86,13 +86,96 @@ const onScroll = () => {
 document.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
+// Navigation sliding spotlight tracking indicator
+function initNavHighlight() {
+  const navContainer = document.querySelector("#navbar nav");
+  const hoverIndicator = document.getElementById("nav-hover-indicator");
+  if (!navContainer || !hoverIndicator) return;
+
+  const links = navContainer.querySelectorAll("a");
+
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      const width = link.offsetWidth;
+      const height = link.offsetHeight;
+      const left = link.offsetLeft;
+      const top = link.offsetTop;
+
+      // Update positions with absolute layout bounds
+      hoverIndicator.style.width = `${width}px`;
+      hoverIndicator.style.height = `${height}px`;
+      hoverIndicator.style.left = `${left}px`;
+      hoverIndicator.style.top = `${top}px`;
+      hoverIndicator.style.opacity = "1";
+    });
+  });
+
+  navContainer.addEventListener("mouseleave", () => {
+    hoverIndicator.style.opacity = "0";
+  });
+}
+
+// Cinematic Hero spotlight tracking
+function initHeroInteractions() {
+  const heroSection = document.getElementById("home");
+  if (heroSection) {
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      heroSection.style.setProperty("--mouse-x", `${x}px`);
+      heroSection.style.setProperty("--mouse-y", `${y}px`);
+    });
+  }
+}
+
+// Dynamically split and wrap headline words to support staggered slide reveals in any language
+function wrapHeadlineWords() {
+  const headline = document.getElementById("hero-title");
+  if (!headline) return;
+  const text = headline.textContent.trim();
+  if (!text) return;
+
+  const words = text.split(/\s+/);
+  const isArabic = document.documentElement.lang === "ar" || localStorage.getItem("lang") === "ar";
+
+  headline.innerHTML = words
+    .map((word, index) => {
+      // Highlight the last two words with custom gradients
+      const isGradient = index >= words.length - 2;
+      const wordClass = isGradient ? "word-gradient font-black" : "word";
+      let html = `<span class="word-wrapper"><span class="${wordClass}">${word}</span></span>`;
+
+      // Inject soft line-breaks for balanced editorial layout layouts
+      if (!isArabic && index === 2) {
+        html += '<br class="hidden sm:inline" />'; // After "interfaces" in English
+      } else if (isArabic && index === 1) {
+        html += '<br class="hidden sm:inline" />'; // After "واجهات" in Arabic
+      }
+
+      return html;
+    })
+    .join(" ");
+}
+
+
+
+
 // Mobile menu
 const menuBtn = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
-menuBtn?.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+menuBtn?.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+  menuBtn.classList.toggle("active");
+});
 mobileMenu
   ?.querySelectorAll("a")
-  .forEach((a) => a.addEventListener("click", () => mobileMenu.classList.add("hidden")));
+  .forEach((a) =>
+    a.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      menuBtn.classList.remove("active");
+    }),
+  );
 
 // Reveal-on-scroll
 const io = new IntersectionObserver(
@@ -294,15 +377,49 @@ const projects = [
   },
 ];
 
+let currentFilter = "all";
 let visibleCount = 6; // default visible projects
-function renderProjects(lang) {
+
+function getProjectCategory(p) {
+  const cats = ["all"];
+  if (p.tech && p.tech.includes("React")) cats.push("react");
+  if (p.tech && p.tech.includes("Tailwind")) cats.push("tailwind");
+
+  const titleLower = (p.title || "").toLowerCase();
+  const descLower = (p.desc || "").toLowerCase();
+  if (
+    titleLower.includes("store") ||
+    titleLower.includes("shop") ||
+    titleLower.includes("maison") ||
+    titleLower.includes("handmade") ||
+    descLower.includes("e-commerce") ||
+    descLower.includes("commerce") ||
+    descLower.includes("shop") ||
+    descLower.includes("store")
+  ) {
+    cats.push("ecommerce");
+  }
+  return cats;
+}
+
+function renderProjects(lang, filter = currentFilter) {
+  currentFilter = filter;
   const t = translations[lang] || translations.en;
   const grid = document.getElementById("projects-grid");
   if (!grid) return;
+
+  // Filter projects first
+  const filtered = projects.filter((p) => {
+    const cats = getProjectCategory(p);
+    return cats.includes(filter);
+  });
+
   const isReRender = grid.children.length > 0;
-  // Use visibleCount to limit displayed projects
-  const visibleProjects = projects.slice(0, visibleCount);
-  grid.innerHTML = visibleProjects
+  
+  // Show all for category filters, slice only for "all"
+  const displayProjects = filter === "all" ? filtered.slice(0, visibleCount) : filtered;
+
+  grid.innerHTML = displayProjects
     .map((p, i) => {
       const idx = i + 1;
       const key = p.translationKey || `project-${idx}`;
@@ -347,14 +464,20 @@ function renderProjects(lang) {
       `;
     })
     .join("");
+
   // Observe reveal elements only if not a re-render
   if (!isReRender) {
     grid.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   }
+
   // Show/hide Show More button
   const btn = document.getElementById("projects-show-more");
   if (btn) {
-    btn.style.display = visibleCount >= projects.length ? "none" : "block";
+    if (filter === "all" && visibleCount < filtered.length) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
   }
 }
 
@@ -362,7 +485,7 @@ function initProjectShowMore() {
   const btn = document.getElementById("projects-show-more");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    visibleCount = projects.length; // Show all projects on first click for premium UX
+    visibleCount = projects.length; // Show all projects on click
     const lang = localStorage.getItem("lang") || "ar";
     renderProjects(lang);
   });
@@ -538,7 +661,7 @@ const translations = {
 
     // Hero
     "hero-badge": "Front-end engineering studio",
-    "hero-title": 'We build interfaces that <span class="gradient-text">move people.</span>',
+    "hero-title": "We build interfaces that move people.",
     "hero-desc":
       "Wave is a front-end team designing and shipping modern, lightning-fast websites and product UIs for forward-thinking brands. Pixel-perfect, performance‑obsessed, future‑ready.",
     "hero-cta-primary": "Start a project →",
@@ -572,6 +695,10 @@ const translations = {
     "section-projects-tag": "03 — Selected work",
     "section-projects-title": "Recent projects.",
     "projects-body": "A glimpse of interfaces we've designed and shipped recently.",
+    "filter-all": "All",
+    "filter-react": "React",
+    "filter-tailwind": "Tailwind",
+    "filter-ecommerce": "E-Commerce",
 
     // Tech
     "section-tech-tag": "04 — Stack",
@@ -664,7 +791,7 @@ const translations = {
 
     // Hero
     "hero-badge": "استوديو تطوير الواجهات الأمامية",
-    "hero-title": 'نبني واجهات <span class="gradient-text">تُحرّك الناس.</span>',
+    "hero-title": "نبني واجهات تُحرّك الناس.",
     "hero-desc":
       "Wave فريق متخصص في تصميم وتطوير مواقع حديثة وسريعة وواجهات منتجات احترافية للعلامات التجارية الطموحة. دقة بكسل، أداء لا يُضاهى، جاهز للمستقبل.",
     "hero-cta-primary": "ابدأ مشروعك ←",
@@ -698,6 +825,10 @@ const translations = {
     "section-projects-tag": "03 — أعمال مختارة",
     "section-projects-title": "مشاريع حديثة.",
     "projects-body": "لمحة عن الواجهات التي صممناها وأطلقناها مؤخراً.",
+    "filter-all": "الكل",
+    "filter-react": "React",
+    "filter-tailwind": "Tailwind",
+    "filter-ecommerce": "تجارة إلكترونية",
 
     // Tech
     "section-tech-tag": "04 — التقنية",
@@ -808,6 +939,14 @@ function applyTranslations(lang) {
   // Re-render dynamic sections so they use the new language
   renderServices(lang);
   renderProjects(lang);
+
+  // Update filter translations if initializer has registered the translation routine
+  if (window.updateFilterTranslations) {
+    window.updateFilterTranslations();
+  }
+
+  // Wrap headline words dynamically for animations
+  wrapHeadlineWords();
 }
 
 function setLanguage(lang) {
@@ -1045,12 +1184,118 @@ function initBrandLoader() {
   });
 }
 
+// B. Portfolio Category Filtering
+function initProjectFilters() {
+  const container = document.getElementById("project-filters");
+  if (!container) return;
+
+  const filterKeys = ["all", "react", "tailwind", "ecommerce"];
+
+  function renderFilterButtons() {
+    const lang = localStorage.getItem("lang") || "ar";
+    const t = translations[lang] || translations.en;
+
+    container.innerHTML = filterKeys
+      .map((key) => {
+        const label = t[`filter-${key}`] || key;
+        const activeClass = key === currentFilter ? "active" : "";
+        return `
+          <button 
+            data-filter="${key}" 
+            class="filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${activeClass}"
+          >
+            ${label}
+          </button>
+        `;
+      })
+      .join("");
+
+    container.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+        
+        container.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        renderProjects(lang, filter);
+      });
+    });
+  }
+
+  renderFilterButtons();
+  window.updateFilterTranslations = renderFilterButtons;
+}
+
+// A. Dynamic Scrollspy Active Navigation Link Tracker
+function initScrollspy() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll("#navbar nav a");
+
+  if (!sections.length || !navLinks.length) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "-30% 0px -40% 0px",
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href && href.startsWith("#")) {
+            const linkTarget = href.substring(1);
+            const isMatch = linkTarget === id;
+            if (isMatch) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// C. Premium Floating Back to Top Button
+function initBackToTop() {
+  const btn = document.getElementById("back-to-top");
+  if (!btn) return;
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 500) {
+      btn.classList.add("visible");
+      btn.classList.remove("pointer-events-none", "opacity-0", "translate-y-4");
+    } else {
+      btn.classList.remove("visible");
+      btn.classList.add("pointer-events-none", "opacity-0", "translate-y-4");
+    }
+  });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
+
 // Initialize toggles after DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageToggle(); // this calls applyTranslations which calls renderServices/Projects/Testimonials
   initThemeToggle();
   initProjectShowMore();
   initBrandLoader();
+  initNavHighlight();
+  initHeroInteractions();
+  initProjectFilters();
+  initScrollspy();
+  initBackToTop();
 });
 
 const whatsappPhone = "201550888640";
