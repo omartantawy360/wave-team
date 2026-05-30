@@ -842,6 +842,17 @@ function initThemeToggle() {
         ? `<path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>`
         : `<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>`;
     }
+
+    // Dynamic brand logo swap (w-l.png for Dark Mode, W.png for Light Mode)
+    const navbarLogo = document.getElementById("navbar-logo");
+    const footerLogo = document.getElementById("footer-logo");
+    if (isDark) {
+      if (navbarLogo) navbarLogo.src = "./assets/w-l.png";
+      if (footerLogo) footerLogo.src = "./assets/w-l.png";
+    } else {
+      if (navbarLogo) navbarLogo.src = "./assets/W.png";
+      if (footerLogo) footerLogo.src = "./assets/W.png";
+    }
   }
 
   btn.addEventListener("click", () => {
@@ -855,11 +866,191 @@ function initThemeToggle() {
   applyTheme(saved === "dark");
 }
 
+// --- FULLSCREEN LOGO LOADER ---
+function initBrandLoader() {
+  const loader = document.getElementById("wave-loader");
+  if (!loader) return;
+
+  // Generic function to execute the 5-second progress bar animation
+  function runProgressAnimation(onComplete) {
+    // Lock scrolling to keep standard elements clean during loading
+    document.body.style.overflow = "hidden";
+
+    // Ensure loader is visible
+    loader.classList.remove("invisible", "opacity-0", "pointer-events-none");
+    loader.classList.add("opacity-100", "pointer-events-auto");
+
+    const progressBar = document.getElementById("loader-progress-bar");
+    const percentageText = document.getElementById("loader-percentage");
+    const statusText = document.getElementById("loader-status-text");
+
+    // Reset progress states
+    if (progressBar) progressBar.style.width = "0%";
+    if (percentageText) percentageText.textContent = "0%";
+    if (statusText) statusText.textContent = "Connecting to Wave Core...";
+
+    // Reset dynamic checklist items to initial gray state
+    const checks = [
+      { id: "check-core", label: "1" },
+      { id: "check-ui", label: "2" },
+      { id: "check-shaders", label: "3" },
+      { id: "check-sync", label: "4" },
+    ];
+    checks.forEach((check) => {
+      const el = document.getElementById(check.id);
+      if (el) {
+        el.className =
+          "flex items-center gap-2 text-[10px] tracking-wide text-white/20 transition-all duration-300";
+        const icon = el.querySelector(".check-icon");
+        if (icon) {
+          icon.textContent = check.label;
+          icon.className =
+            "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-white/10 text-[8px] transition-all duration-300 shrink-0";
+        }
+      }
+    });
+
+    let progress = 0;
+    const duration = 5000; // 5000ms = 5 seconds
+    const intervalTime = 40; // update progress every 40ms for buttery-smooth increments
+    const totalSteps = duration / intervalTime;
+    const stepValue = 100 / totalSteps;
+
+    // Status text updates that match Wave Studio themes
+    const statusPhrases = [
+      { limit: 20, text: "Connecting to Wave Core..." },
+      { limit: 40, text: "Loading custom styles & layouts..." },
+      { limit: 60, text: "Calibrating 3D UI layers..." },
+      { limit: 80, text: "Applying dynamic HSL shaders..." },
+      { limit: 95, text: "Optimizing frame compositing..." },
+      { limit: 100, text: "Synchronizing system state..." },
+    ];
+
+    const timer = setInterval(() => {
+      progress += stepValue;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(timer);
+
+        if (progressBar) progressBar.style.width = "100%";
+        if (percentageText) percentageText.textContent = "100%";
+        if (statusText) statusText.textContent = "Complete. Launching...";
+
+        // Mark all checks complete just to be sure at 100%
+        checks.forEach((check) => {
+          const el = document.getElementById(check.id);
+          if (el) {
+            el.className =
+              "flex items-center gap-2 text-[10px] tracking-wide text-cyan transition-all duration-300";
+            const icon = el.querySelector(".check-icon");
+            if (icon) {
+              icon.innerHTML = "✓";
+              icon.className =
+                "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-cyan/50 bg-cyan/10 text-[8px] transition-all duration-300 shrink-0";
+            }
+          }
+        });
+
+        setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 400);
+      } else {
+        const displayProgress = Math.floor(progress);
+        if (progressBar) progressBar.style.width = `${displayProgress}%`;
+        if (percentageText) percentageText.textContent = `${displayProgress}%`;
+
+        // Find the active status phrase
+        const activePhrase = statusPhrases.find((p) => displayProgress <= p.limit);
+        if (activePhrase && statusText) {
+          statusText.textContent = activePhrase.text;
+        }
+
+        // Dynamically activate checklist items on milestones
+        const checkCore = document.getElementById("check-core");
+        const checkUI = document.getElementById("check-ui");
+        const checkShaders = document.getElementById("check-shaders");
+        const checkSync = document.getElementById("check-sync");
+
+        if (displayProgress >= 25 && checkCore) {
+          checkCore.classList.remove("text-white/20");
+          checkCore.classList.add("text-cyan");
+          const icon = checkCore.querySelector(".check-icon");
+          if (icon && icon.textContent !== "✓") {
+            icon.innerHTML = "✓";
+            icon.className =
+              "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-cyan/50 bg-cyan/10 text-[8px] transition-all duration-300 shrink-0";
+          }
+        }
+        if (displayProgress >= 50 && checkUI) {
+          checkUI.classList.remove("text-white/20");
+          checkUI.classList.add("text-cyan");
+          const icon = checkUI.querySelector(".check-icon");
+          if (icon && icon.textContent !== "✓") {
+            icon.innerHTML = "✓";
+            icon.className =
+              "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-cyan/50 bg-cyan/10 text-[8px] transition-all duration-300 shrink-0";
+          }
+        }
+        if (displayProgress >= 75 && checkShaders) {
+          checkShaders.classList.remove("text-white/20");
+          checkShaders.classList.add("text-cyan");
+          const icon = checkShaders.querySelector(".check-icon");
+          if (icon && icon.textContent !== "✓") {
+            icon.innerHTML = "✓";
+            icon.className =
+              "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-cyan/50 bg-cyan/10 text-[8px] transition-all duration-300 shrink-0";
+          }
+        }
+        if (displayProgress >= 95 && checkSync) {
+          checkSync.classList.remove("text-white/20");
+          checkSync.classList.add("text-cyan");
+          const icon = checkSync.querySelector(".check-icon");
+          if (icon && icon.textContent !== "✓") {
+            icon.innerHTML = "✓";
+            icon.className =
+              "check-icon w-3.5 h-3.5 flex items-center justify-center rounded-full border border-cyan/50 bg-cyan/10 text-[8px] transition-all duration-300 shrink-0";
+          }
+        }
+      }
+    }, intervalTime);
+  }
+
+  // 1. Initial Page Load: Run progress animation immediately, then fade out smoothly
+  runProgressAnimation(() => {
+    // Smoothly fade out the loader overlay
+    loader.classList.remove("opacity-100", "pointer-events-auto");
+    loader.classList.add("opacity-0", "pointer-events-none");
+
+    // Unlock scrolling
+    document.body.style.overflow = "";
+
+    // Set invisible helper classes after fade animation completes (500ms)
+    setTimeout(() => {
+      loader.classList.add("invisible");
+    }, 500);
+  });
+
+  // 2. Logo Link Clicks: Run progress animation, then trigger physical reload
+  const triggers = document.querySelectorAll(".logo-loader-trigger");
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      runProgressAnimation(() => {
+        // Scroll to top and reload
+        window.scrollTo(0, 0);
+        window.location.reload();
+      });
+    });
+  });
+}
+
 // Initialize toggles after DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageToggle(); // this calls applyTranslations which calls renderServices/Projects/Testimonials
   initThemeToggle();
   initProjectShowMore();
+  initBrandLoader();
 });
 
 const whatsappPhone = "201550888640";
