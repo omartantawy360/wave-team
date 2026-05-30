@@ -52,11 +52,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=Cairo:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -223,308 +223,254 @@
     </div>
 
     <!-- NAV -->
-    <header class="fixed top-0 inset-x-0 z-50 transition-all" id="navbar">
-      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
-        <a href="#home" class="flex items-center gap-3 group logo-loader-trigger">
-          <img
-            id="navbar-logo"
-            src="./assets/w-l.png"
-            alt="Wave logo"
-            class="h-20 w-auto shrink-0 object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.6)] transition-transform group-hover:scale-110"
-          />
-        </a>
-        <nav class="hidden md:flex items-center gap-9 text-sm" style="color: var(--text-nav)">
-          <a
-            id="nav-about"
-            href="#about"
-            class="hover:text-cyan transition"
-            data-i18n="nav-about"
-          ></a>
-          <a
-            id="nav-services"
-            href="#services"
-            class="hover:text-cyan transition"
-            data-i18n="nav-services"
-            >Services</a
-          >
-          <a
-            id="nav-projects"
-            href="#projects"
-            class="hover:text-cyan transition"
-            data-i18n="nav-projects"
-            >Projects</a
-          >
-          <a id="nav-stack" href="#tech" class="hover:text-cyan transition" data-i18n="nav-stack"
-            >Stack</a
-          >
-          <a id="nav-team" href="#team" class="hover:text-cyan transition" data-i18n="nav-team"
-            >Team</a
-          >
-          <a
-            id="nav-contact"
-            href="#contact"
-            class="hover:text-cyan transition"
-            data-i18n="nav-contact"
-            >Contact</a
-          >
-        </nav>
-        <a
-          href="#contact"
-          class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-cyan to-blue hover:shadow-[0_0_30px_rgba(34,211,238,0.45)] transition"
-          data-i18n="start-project"
-          style="color: #04060d"
-          >Start a project →</a
+    <header class="fixed top-0 inset-x-0 z-50 w-full transition-all duration-500 pointer-events-none" id="navbar">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-500">
+        <div 
+          id="navbar-inner" 
+          class="w-full mx-auto px-6 py-3 flex items-center justify-between rounded-2xl transition-all duration-500 ease-out pointer-events-auto"
+          style="background: transparent; border: 1px solid transparent;"
         >
-        <button
-          id="menu-toggle"
-          class="md:hidden p-2 rounded-lg border"
-          style="border-color: var(--border-color); background: var(--bg-pill)"
-          aria-label="Menu"
+          <a href="#home" style = "position: relative;  top:7px "   class="flex items-center gap-3 group logo-loader-trigger relative z-10 ">
+            <img
+              id="navbar-logo"
+              src="./assets/w-l.png"
+              alt="Wave logo"
+              class="h-16 w-auto shrink-0 object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] transition-transform group-hover:scale-110 duration-500"
+            />
+          </a>
+          <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm relative p-1.5 rounded-full" style="color: var(--text-nav)">
+            <!-- Sliding highlight spotlight background -->
+            <div 
+              id="nav-hover-indicator" 
+              class="nav-hover-indicator absolute pointer-events-none rounded-full transition-all duration-300 ease-out opacity-0 z-0 bg-cyan/10 border border-cyan/20 blur-[1px]"
+              style="left: 0; top: 0; width: 0; height: 0;"
+            ></div>
+            
+            <a
+              id="nav-about"
+              href="#about"
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]"
+              data-i18n="nav-about"
+            ></a>
+            <a
+              id="nav-services"
+              href="#services"
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]"
+              data-i18n="nav-services"
+              >Services</a
+            >
+            <a
+              id="nav-projects"
+              href="#projects"
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]"
+              data-i18n="nav-projects"
+              >Projects</a
+            >
+            <a 
+              id="nav-stack" 
+              href="#tech" 
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]" 
+              data-i18n="nav-stack"
+              >Stack</a
+            >
+            <a 
+              id="nav-team" 
+              href="#team" 
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]" 
+              data-i18n="nav-team"
+              >Team</a
+            >
+            <a
+              id="nav-contact"
+              href="#contact"
+              class="hover:text-cyan transition relative z-10 px-3 py-1.5 font-medium tracking-wide uppercase text-[11px]"
+              data-i18n="nav-contact"
+              >Contact</a
+            >
+          </nav>
+          
+          <div class="flex items-center gap-2 relative z-10">
+            <a
+              href="#contact"
+              class="hidden md:inline-flex btn-nav-cta items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-cyan to-blue transition-all duration-300"
+              data-i18n="start-project"
+              style="color: #04060d;"
+              >Start a project →</a
+            >
+            <button
+              id="menu-toggle"
+              class="md:hidden p-2.5 rounded-xl border transition-all duration-300 flex items-center justify-center"
+              style="border-color: var(--border-color); background: var(--bg-pill); color: var(--text-primary);"
+              aria-label="Menu"
+            >
+              <div class="hamburger-icon flex flex-col justify-between w-5 h-3.5 relative cursor-pointer">
+                <span class="line line-1 w-full h-0.5 bg-current rounded-full transition-all duration-300"></span>
+                <span class="line line-2 w-full h-0.5 bg-current rounded-full transition-all duration-300"></span>
+                <span class="line line-3 w-full h-0.5 bg-current rounded-full transition-all duration-300"></span>
+              </div>
+            </button>
+            <!-- Theme toggle -->
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full transition-all duration-300"
+              style="
+                background: var(--bg-pill);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+              "
+              aria-label="Toggle Theme"
+            >
+              <svg
+                id="theme-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            </button>
+            <!-- Language toggle -->
+            <button
+              id="lang-toggle"
+              class="px-2.5 py-1.5 rounded-full text-xs font-bold transition-all duration-300"
+              style="
+                background: var(--bg-pill);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+              "
+              aria-label="Toggle Language"
+            >
+              <span data-i18n="toggle-language">EN</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden border rounded-2xl mt-2 overflow-hidden backdrop-blur-xl transition-all duration-300"
+          style="background: var(--bg-glass-card); border-color: var(--border-color);"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <!-- Theme toggle -->
-        <button
-          id="theme-toggle"
-          class="ml-2 p-2 rounded-full"
-          style="
-            background: var(--bg-pill);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-          "
-          aria-label="Toggle Theme"
-        >
-          <svg
-            id="theme-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-          </svg>
-        </button>
-        <!-- Language toggle -->
-        <button
-          id="lang-toggle"
-          class="ml-2 px-3 py-1.5 rounded-full text-sm font-semibold"
-          style="
-            background: var(--bg-pill);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-          "
-          aria-label="Toggle Language"
-        >
-          <span data-i18n="toggle-language">EN</span>
-        </button>
-      </div>
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden border-t backdrop-blur-lg"
-        style="background: var(--bg-glass); border-color: var(--border-section)"
-      >
-        <div class="px-6 py-4 flex flex-col gap-4 text-sm" style="color: var(--text-secondary)">
-          <a href="#about" data-i18n="nav-about">About</a>
-          <a href="#services" data-i18n="nav-services">Services</a>
-          <a href="#projects" data-i18n="nav-projects">Projects</a>
-          <a href="#tech" data-i18n="nav-stack">Stack</a>
-          <a href="#team" data-i18n="nav-team">Team</a>
-          <a href="#contact" data-i18n="nav-contact">Contact</a>
+          <div class="px-6 py-5 flex flex-col gap-4 text-sm font-semibold uppercase tracking-wider text-[11px]" style="color: var(--text-secondary)">
+            <a href="#about" class="hover:text-cyan transition-colors" data-i18n="nav-about">About</a>
+            <a href="#services" class="hover:text-cyan transition-colors" data-i18n="nav-services">Services</a>
+            <a href="#projects" class="hover:text-cyan transition-colors" data-i18n="nav-projects">Projects</a>
+            <a href="#tech" class="hover:text-cyan transition-colors" data-i18n="nav-stack">Stack</a>
+            <a href="#team" class="hover:text-cyan transition-colors" data-i18n="nav-team">Team</a>
+            <a href="#contact" class="hover:text-cyan transition-colors" data-i18n="nav-contact">Contact</a>
+            <a href="#contact" class="inline-flex justify-center items-center py-2.5 rounded-xl text-center bg-gradient-to-r from-cyan to-blue font-bold text-slate-950 uppercase tracking-widest text-[10px]" data-i18n="start-project">Start a project →</a>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- HERO -->
-    <section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-      <img
-        src="./assets/hero-bg.jpg"
-        alt=""
-        aria-hidden="true"
-        class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen dark:mix-blend-screen"
-      />
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-white dark:from-ink/20 dark:via-ink/60 dark:to-ink"
-      ></div>
-      <div
-        class="relative max-w-7xl mx-auto px-6 lg:px-10 w-full grid lg:grid-cols-12 gap-12 items-center"
-      >
-        <div class="lg:col-span-7 reveal">
-          <span
-            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.18em] glass"
-          >
-            <span
-              class="h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_10px_#22d3ee] animate-pulse"
-            ></span>
-            <span data-i18n="hero-badge" style="color: var(--text-secondary)"
-              >Front-end engineering studio</span
-            >
-          </span>
-          <h1
-            class="font-display mt-7 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight"
-            data-i18n="hero-title"
-          ></h1>
-          <p class="mt-6 text-lg max-w-xl leading-relaxed" data-i18n="hero-desc"></p>
-          <div class="mt-10 flex flex-wrap gap-4">
-            <a href="#about" class="btn-primary" data-i18n="hero-cta-primary">Start a project →</a>
-            <a href="#contact" class="btn-ghost" data-i18n="hero-cta-secondary">Contact Us</a>
-          </div>
-          <div class="mt-14 grid grid-cols-3 gap-6 max-w-md">
-            <div>
-              <div class="text-3xl font-display font-bold" style="color: var(--text-primary)">
-                15+
-              </div>
-              <div class="text-xs mt-1" data-i18n="hero-stat-1-label">Projects shipped</div>
-            </div>
-            <div>
-              <div class="text-3xl font-display font-bold" style="color: var(--text-primary)">
-                98<span class="text-cyan">%</span>
-              </div>
-              <div class="text-xs mt-1" data-i18n="hero-stat-2-label">Client retention</div>
-            </div>
-            <div>
-              <div class="text-3xl font-display font-bold" style="color: var(--text-primary)">
-                2
-              </div>
-              <div class="text-xs mt-1" data-i18n="hero-stat-3-label">Years of craft</div>
-            </div>
-          </div>
+    <section id="home" class="relative min-h-screen flex flex-col justify-center pt-36 pb-36 overflow-hidden">
+      <!-- Animated Mesh Gradient Blobs & Noise Texture Background -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none -z-20 bg-transparent">
+        <div class="mesh-blob mesh-1"></div>
+        <div class="mesh-blob mesh-2"></div>
+        <div class="mesh-blob mesh-3"></div>
+        <div class="noise-grain-overlay"></div>
+      </div>
+
+      <!-- Layered Animated SVG Wave Lines -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10 opacity-30 select-none">
+        <svg class="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="wave-path wave-path-1" d="M-100,200 Q300,50 700,450 T1500,250" stroke="url(#cyan-glow-gradient)" stroke-width="1.5" />
+          <path class="wave-path wave-path-2" d="M-50,350 Q400,600 800,200 T1600,400" stroke="url(#blue-glow-gradient)" stroke-width="1" stroke-dasharray="10 15" />
+          <path class="wave-path wave-path-3" d="M0,500 Q500,200 900,600 T1700,300" stroke="url(#cyan-glow-gradient)" stroke-width="1.2" opacity="0.5" />
+          <defs>
+            <linearGradient id="cyan-glow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="blue-glow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-10 w-full flex flex-col items-center justify-center text-center z-10">
+        <!-- Tagline badge -->
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.22em] glass mb-8 border border-white/10 shrink-0">
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_10px_#22d3ee] animate-pulse"></span>
+          <span data-i18n="hero-badge" style="color: var(--text-secondary)">Front-end engineering studio</span>
+        </span>
+
+        <!-- Headline (Editorial Staggered Stencil Reveal) -->
+        <h1 
+          id="hero-title" 
+          data-i18n="hero-title" 
+          class="hero-headline font-display text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.05] tracking-tight max-w-5xl mx-auto mb-6 text-slate-950 dark:text-white uppercase select-none"
+        >
+          We build interfaces that move people.
+        </h1>
+
+        <!-- Subtext -->
+        <p class="text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400 font-medium mb-10" data-i18n="hero-desc">
+          Wave is a front-end team designing and shipping modern, lightning-fast websites and product UIs for forward-thinking brands. Pixel-perfect, performance-obsessed, future-ready.
+        </p>
+
+        <!-- Centered Buttons (Breathing liquid hover + ghost) -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 z-20">
+          <a href="#about" class="btn-liquid shrink-0 shadow-[0_0_30px_rgba(34,211,238,0.25)]" data-i18n="hero-cta-primary">
+            <span class="btn-text relative z-10">Start a project →</span>
+            <div class="liquid-bg"></div>
+          </a>
+          <a href="#contact" class="btn-ghost shrink-0" data-i18n="hero-cta-secondary">Contact Us</a>
         </div>
-        <!-- Right Column: Interactive UI Showcase Workspace (No Logos) -->
-        <div class="lg:col-span-5 reveal relative flex justify-center items-center h-[500px]">
-          <div class="ui-showcase-container relative w-full h-full max-w-[400px]">
-            <!-- Card 1: Real-time Analytics Dashboard Card -->
-            <div
-              class="ui-card ui-card-analytics glass-card absolute p-6 w-[280px] top-4 left-0 select-none cursor-pointer"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <span
-                  class="text-[10px] font-extrabold tracking-widest uppercase text-cyan/90 bg-cyan/10 px-2 py-0.5 rounded border border-cyan/20"
-                  >LIVE METRICS</span
-                >
-                <span
-                  class="h-2 w-2 rounded-full bg-cyan shadow-[0_0_8px_#22d3ee] animate-pulse"
-                ></span>
-              </div>
-              <div class="text-2xl font-bold font-display text-white mb-1">99.8%</div>
-              <p class="text-[10px] text-slate-400 font-medium mb-4">Core Web Vitals Performance</p>
-              <!-- Glowing neon SVG line chart -->
-              <div class="w-full h-16 relative">
-                <svg class="w-full h-full overflow-visible" viewBox="0 0 100 40" fill="none">
-                  <defs>
-                    <linearGradient id="chart-glow" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.2" />
-                      <stop offset="50%" stop-color="#1d4ed8" stop-opacity="0.8" />
-                      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.2" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M0,35 Q15,20 30,28 T60,10 T85,15 T100,5"
-                    stroke="url(#chart-glow)"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    class="drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]"
-                  />
-                  <path
-                    d="M0,35 Q15,20 30,28 T60,10 T85,15 T100,5 L100,40 L0,40 Z"
-                    fill="url(#chart-glow)"
-                    opacity="0.1"
-                  />
-                </svg>
-              </div>
-            </div>
+      </div>
 
-            <!-- Card 2: Performance Metrics (Speed Score 100) Card -->
-            <div
-              class="ui-card ui-card-metrics glass-card absolute p-5 w-[200px] bottom-10 left-6 select-none cursor-pointer flex items-center gap-4"
-            >
-              <div class="relative w-12 h-12 shrink-0">
-                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                  <path
-                    class="text-slate-800"
-                    stroke-width="3.5"
-                    stroke="currentColor"
-                    fill="none"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <path
-                    class="text-cyan drop-shadow-[0_0_6px_rgba(34,211,238,0.8)]"
-                    stroke-dasharray="100, 100"
-                    stroke-width="3.5"
-                    stroke-linecap="round"
-                    stroke="currentColor"
-                    fill="none"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                </svg>
-                <div
-                  class="absolute inset-0 flex items-center justify-center font-display font-bold text-xs text-white"
-                >
-                  100
-                </div>
-              </div>
-              <div>
-                <h4 class="text-xs font-bold text-white mb-0.5">Speed Score</h4>
-                <p class="text-[9px] text-slate-400 font-medium">Sub-second load</p>
-              </div>
-            </div>
-
-            <!-- Card 3: Interactive System Toggle Card -->
-            <div
-              class="ui-card ui-card-billing glass-card absolute p-5 w-[240px] top-[140px] right-[-30px] select-none cursor-pointer"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <span class="text-[9px] font-extrabold tracking-widest text-slate-400 uppercase"
-                  >ACTIVE MEMBERSHIP</span
-                >
-                <span
-                  class="text-[9px] font-bold text-cyan bg-cyan/15 px-2 py-0.5 rounded-full uppercase border border-cyan/20"
-                  >PREMIUM</span
-                >
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <h4 class="text-sm font-bold text-white mb-0.5">Auto-Scale UI</h4>
-                  <p class="text-[9px] text-slate-400">Deploy interfaces fluidly</p>
-                </div>
-                <!-- Interactive Toggle switch styling -->
-                <div
-                  class="w-10 h-6 bg-cyan rounded-full p-1 cursor-pointer transition-colors duration-300 relative shadow-[0_0_12px_rgba(34,211,238,0.5)]"
-                >
-                  <div
-                    class="w-4 h-4 bg-slate-950 rounded-full shadow-md transform translate-x-4 transition-transform duration-300"
-                  ></div>
-                </div>
-              </div>
-            </div>
+      <!-- Stats Horizontal Ticker Marquee Strip at Bottom of Hero -->
+      <div class="absolute bottom-0 inset-x-0 hero-ticker border-t border-b border-white/5 py-4 w-full overflow-hidden bg-black/40 backdrop-blur-md z-20 pointer-events-auto select-none">
+        <div class="ticker-wrapper flex gap-24 animate-ticker whitespace-nowrap">
+          <!-- Item 1 -->
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+          </div>
+          <!-- Item 2 -->
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-cyan">98%</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+          </div>
+          <!-- Item 3 -->
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
+          </div>
+          <!-- Loop Duplicates -->
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+          </div>
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-cyan">98%</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+          </div>
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
+          </div>
+          <!-- Extra padding loop duplicates -->
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+          </div>
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-cyan">98%</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+          </div>
+          <div class="ticker-item flex items-center gap-3 shrink-0">
+            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
           </div>
         </div>
       </div>
-      <a
-        href="#about"
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs flex flex-col items-center gap-2 animate-bounce-slow"
-        style="color: var(--text-muted)"
-      >
-        <span class="uppercase tracking-[0.3em]" data-i18n="hero-scroll">Scroll</span>
-        <svg
-          width="14"
-          height="20"
-          viewBox="0 0 14 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-        >
-          <path d="M7 1v18M1 13l6 6 6-6" />
-        </svg>
-      </a>
     </section>
 
     <section id="about" class="relative py-32">
@@ -602,6 +548,7 @@
           </p>
         </div>
         <div class="mt-16 relative">
+          <div id="project-filters" class="flex flex-wrap justify-center gap-3 mb-10 reveal"></div>
           <div id="projects-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
           <button
             id="projects-show-more"
@@ -770,6 +717,18 @@
         </div>
       </div>
     </footer>
+
+    <!-- Premium Floating Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 p-3.5 rounded-full glass border border-white/10 opacity-0 pointer-events-none translate-y-4 transition-all duration-300 z-50 hover:scale-110"
+      aria-label="Back to Top"
+      style="background: var(--bg-glass); border-color: var(--border-color); color: var(--cyan);"
+    >
+      <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+    </button>
 
     <script src="./script.js?v=1.0.6"></script>
   </body>
