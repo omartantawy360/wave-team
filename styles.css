@@ -456,10 +456,10 @@ section.border-t {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.8rem;
+  padding: 0.75rem 1.6rem;
   border-radius: 9999px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #04060d;
   background: linear-gradient(135deg, #a5f3fc, #22d3ee 40%, #1d4ed8);
   box-shadow: var(--shadow-btn);
@@ -478,10 +478,10 @@ section.border-t {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.8rem;
+  padding: 0.75rem 1.6rem;
   border-radius: 9999px;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-primary);
   background: var(--bg-pill);
   border: 1px solid var(--border-color);
@@ -785,6 +785,86 @@ html[lang="ar"] .hero-headline {
   font-family: "IBM Plex Sans Arabic", sans-serif !important;
   line-height: 1.25 !important;
   font-weight: 800 !important;
+  font-size: clamp(2.25rem, 5.5vw, 4.75rem) !important;
+}
+
+/* Sizing overrides for Arabic layouts on first page and navigation */
+html[lang="ar"] [data-i18n="hero-badge"] {
+  font-size: 13px !important;
+}
+
+html[lang="ar"] [data-i18n="hero-desc"] {
+  font-size: clamp(0.95rem, 2vw, 1.15rem) !important;
+  line-height: 1.8 !important;
+}
+
+html[lang="ar"] .btn-liquid,
+html[lang="ar"] .btn-ghost {
+  font-size: 1.05rem !important;
+}
+
+html[lang="ar"] .ticker-item span.font-display {
+  font-size: 1.35rem !important;
+}
+
+html[lang="ar"] .ticker-item span[data-i18n] {
+  font-size: 12px !important;
+}
+
+html[lang="ar"] #navbar nav a {
+  font-size: 13px !important;
+}
+
+html[lang="ar"] .btn-nav-cta {
+  font-size: 13px !important;
+}
+
+html[lang="ar"] #mobile-menu a {
+  font-size: 13px !important;
+}
+
+/* Arabic-specific typography & layout enhancements */
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6 {
+  font-family: "IBM Plex Sans Arabic", sans-serif !important;
+  font-weight: 800 !important;
+}
+
+html[lang="ar"] .section-title {
+  line-height: 1.35 !important;
+}
+
+html[lang="ar"] p,
+html[lang="ar"] span,
+html[lang="ar"] a,
+html[lang="ar"] label,
+html[lang="ar"] input,
+html[lang="ar"] textarea {
+  font-weight: 500 !important; /* Slightly heavier body weight for readable, premium Arabic rendering */
+}
+
+html[lang="ar"] p {
+  line-height: 1.75 !important;
+}
+
+/* Force correct right alignment for left-aligned utility text elements in RTL mode */
+html[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+/* RTL Arrow Transitions & Transforms for Projects */
+html[dir="rtl"] .project-card svg {
+  transform: scaleX(-1) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html[dir="rtl"] .project-card a:hover svg,
+html[dir="rtl"] .project-card a:focus svg {
+  transform: scaleX(-1) translateX(4px) !important;
 }
 
 /* Custom premium scrollbar */
@@ -1006,10 +1086,10 @@ html.dark #home::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.95rem 2.2rem;
+  padding: 0.8rem 1.9rem;
   border-radius: 9999px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #1d4ed8 !important;
   background: transparent;
   border: 2px solid #1d4ed8;
@@ -1168,11 +1248,11 @@ html.dark .hero-ticker {
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
   }
-  .ticker-item span.text-2xl {
-    font-size: 1.25rem !important; /* Elegant compact sizing on mobile screen marquee */
+  .ticker-item span.text-xl {
+    font-size: 1.1rem !important; /* Elegant compact sizing on mobile screen marquee */
   }
   .hero-headline {
-    font-size: clamp(2.35rem, 8.5vw, 4rem) !important; /* Perfect fluid typography without overlaps */
+    font-size: clamp(1.4rem, 6vw, 2.25rem) !important; /* Balanced fluid typography for smaller title */
     line-height: 1.15 !important;
   }
 }
