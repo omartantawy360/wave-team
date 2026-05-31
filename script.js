@@ -12,6 +12,8 @@ glowBlob.className = "mouse-glow-blob";
 document.body.appendChild(glowBlob);
 
 document.addEventListener("mousemove", (e) => {
+  if (window.innerWidth <= 1024) return;
+
   mouseX = e.clientX;
   mouseY = e.clientY;
 
@@ -33,6 +35,9 @@ document.addEventListener("mousemove", (e) => {
 
 // Interpolation for smooth cursor trailing
 function animateCursor() {
+  requestAnimationFrame(animateCursor);
+  if (window.innerWidth <= 1024) return;
+
   const ease = 0.15;
   cursorX += (mouseX - cursorX) * ease;
   cursorY += (mouseY - cursorY) * ease;
@@ -40,14 +45,13 @@ function animateCursor() {
   if (cursor) {
     cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
   }
-
-  requestAnimationFrame(animateCursor);
 }
 animateCursor();
 
 // Initialize hover states for cursor using event delegation
 function initCursorHoverListeners() {
   document.addEventListener("mouseover", (e) => {
+    if (window.innerWidth <= 1024) return;
     const hoverable = e.target.closest(
       "a, button, input, textarea, .glass-card, .tech-pill, #menu-toggle, .projects-carousel-btn",
     );
@@ -59,11 +63,13 @@ function initCursorHoverListeners() {
   });
 
   document.addEventListener("mouseleave", () => {
+    if (window.innerWidth <= 1024) return;
     if (cursor) cursor.style.opacity = "0";
     if (cursorDot) cursorDot.style.opacity = "0";
   });
 
   document.addEventListener("mouseenter", () => {
+    if (window.innerWidth <= 1024) return;
     if (cursor) cursor.style.opacity = "1";
     if (cursorDot) cursorDot.style.opacity = "1";
   });
@@ -120,6 +126,7 @@ function initHeroInteractions() {
   const heroSection = document.getElementById("home");
   if (heroSection) {
     heroSection.addEventListener("mousemove", (e) => {
+      if (window.innerWidth <= 1024) return;
       const rect = heroSection.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
