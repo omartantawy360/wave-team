@@ -102,7 +102,7 @@
           <img
             src="./assets/w-l.png"
             alt="Wave Logo Loader"
-            class="relative h-36 w-auto object-contain animate-float"
+            class="relative h-24 w-auto object-contain animate-float"
             style="filter: drop-shadow(0 0 25px rgba(34, 211, 238, 0.6))"
           />
         </div>
@@ -230,12 +230,12 @@
           class="w-full mx-auto px-6 py-3 flex items-center justify-between rounded-2xl transition-all duration-500 ease-out pointer-events-auto"
           style="background: transparent; border: 1px solid transparent;"
         >
-          <a href="#home" style = "position: relative;  top:7px "   class="flex items-center gap-3 group logo-loader-trigger relative z-10 ">
+          <a href="#home" class="flex items-center gap-3 group logo-loader-trigger relative z-10">
             <img
               id="navbar-logo"
               src="./assets/w-l.png"
               alt="Wave logo"
-              class="h-16 w-auto shrink-0 object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] transition-transform group-hover:scale-110 duration-500"
+              class="h-10 w-auto shrink-0 object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] transition-transform group-hover:scale-110 duration-500"
             />
           </a>
           <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm relative p-1.5 rounded-full" style="color: var(--text-nav)">
@@ -366,7 +366,7 @@
     </header>
 
     <!-- HERO -->
-    <section id="home" class="relative min-h-screen flex flex-col justify-center pt-36 pb-36 overflow-hidden">
+    <section id="home" class="relative min-h-screen flex flex-col justify-center pt-24  pb-36 overflow-hidden">
       <!-- Animated Mesh Gradient Blobs & Noise Texture Background -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none -z-20 bg-transparent">
         <div class="mesh-blob mesh-1"></div>
@@ -395,28 +395,24 @@
       </div>
 
       <div class="relative max-w-7xl mx-auto px-6 lg:px-10 w-full flex flex-col items-center justify-center text-center z-10">
-        <!-- Tagline badge -->
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.22em] glass mb-8 border border-white/10 shrink-0">
-          <span class="h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_10px_#22d3ee] animate-pulse"></span>
-          <span data-i18n="hero-badge" style="color: var(--text-secondary)">Front-end engineering studio</span>
-        </span>
+
 
         <!-- Headline (Editorial Staggered Stencil Reveal) -->
         <h1 
           id="hero-title" 
           data-i18n="hero-title" 
-          class="hero-headline font-display text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.05] tracking-tight max-w-5xl mx-auto mb-6 text-slate-950 dark:text-white uppercase select-none"
+          class="hero-headline font-display text-4xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.05] tracking-tight max-w-3xl mx-auto mb-5 text-slate-950 dark:text-white uppercase select-none"
         >
           We build interfaces that move people.
         </h1>
 
         <!-- Subtext -->
-        <p class="text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400 font-medium mb-10" data-i18n="hero-desc">
+        <p class="text-xs sm:text-sm lg:text-base max-w-xl leading-relaxed text-slate-600 dark:text-slate-400 font-medium mb-8" data-i18n="hero-desc">
           Wave is a front-end team designing and shipping modern, lightning-fast websites and product UIs for forward-thinking brands. Pixel-perfect, performance-obsessed, future-ready.
         </p>
 
         <!-- Centered Buttons (Breathing liquid hover + ghost) -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 z-20">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 z-20">
           <a href="#about" class="btn-liquid shrink-0 shadow-[0_0_30px_rgba(34,211,238,0.25)]" data-i18n="hero-cta-primary">
             <span class="btn-text relative z-10">Start a project →</span>
             <div class="liquid-bg"></div>
@@ -426,48 +422,48 @@
       </div>
 
       <!-- Stats Horizontal Ticker Marquee Strip at Bottom of Hero -->
-      <div class="absolute bottom-0 inset-x-0 hero-ticker border-t border-b border-white/5 py-4 w-full overflow-hidden bg-black/40 backdrop-blur-md z-20 pointer-events-auto select-none">
-        <div class="ticker-wrapper flex gap-24 animate-ticker whitespace-nowrap">
+      <div class="absolute bottom-0 inset-x-0 hero-ticker border-t border-b border-white/5 py-3 w-full overflow-hidden bg-black/40 backdrop-blur-md z-20 pointer-events-auto select-none">
+        <div class="ticker-wrapper flex gap-16 animate-ticker whitespace-nowrap">
           <!-- Item 1 -->
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
           </div>
           <!-- Item 2 -->
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-cyan">98%</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+            <span class="text-xl font-bold font-display text-cyan">98%</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
           </div>
           <!-- Item 3 -->
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
           </div>
           <!-- Loop Duplicates -->
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
           </div>
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-cyan">98%</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+            <span class="text-xl font-bold font-display text-cyan">98%</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
           </div>
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
           </div>
           <!-- Extra padding loop duplicates -->
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">15+</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">15+</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-1-label">Projects shipped</span>
           </div>
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-cyan">98%</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
+            <span class="text-xl font-bold font-display text-cyan">98%</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-2-label">Client retention</span>
           </div>
           <div class="ticker-item flex items-center gap-3 shrink-0">
-            <span class="text-2xl font-bold font-display text-slate-950 dark:text-white">2</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
+            <span class="text-xl font-bold font-display text-slate-950 dark:text-white">2</span>
+            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="hero-stat-3-label">Years of craft</span>
           </div>
         </div>
       </div>
